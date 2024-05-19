@@ -2,7 +2,9 @@ version: "3.5"
 
 services:
   rabbitmq:
-    image: rabbitmq:management
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: rabbitmq
     ports:
       - 5672:5672
@@ -23,6 +25,7 @@ services:
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
       - ./scripts/postgres/ddl.sql:/docker-entrypoint-initdb.d/ddl.sql
+      - ./scripts/postgres/populate.sql:/docker-entrypoint-initdb.d/populate.sql
     deploy:
       resources:
         limits:
