@@ -48,52 +48,47 @@ create table pesquisai.researches (
 );
 
 
-create table pesquisai.location (
+create table pesquisai.locations (
 
-                                    id UUID primary key,
-
-                                    name VARCHAR(10)
+                                    id varchar(10) primary key
 
 );
 
 
-create table pesquisai.requests_location (
+create table pesquisai.request_locations (
 
-                                            requests_id UUID,
+                                            request_id UUID,
 
-                                            location_id UUID,
+                                            location_id varchar(10),
 
-                                            primary key (requests_id,location_id),
+                                            primary key (request_id,location_id),
 
-                                            foreign key (requests_id) references pesquisai.requests(id),
+                                            foreign key (request_id) references pesquisai.requests(id),
 
-                                            foreign key (location_id) references pesquisai.location(id)
-
-);
-
-
-
-create table pesquisai.language (
-
-                                    id UUID primary key,
-
-                                    name VARCHAR(10)
+                                            foreign key (location_id) references pesquisai.locations(id)
 
 );
 
 
 
-create table pesquisai.requests_language (
+create table pesquisai.languages (
+                                    id VARCHAR(10) primary key
 
-                                            requests_id UUID,
+);
 
-                                            language_id UUID,
 
-                                            primary key (requests_id,language_id),
 
-                                            foreign key (requests_id) references pesquisai.requests(id),
+create table pesquisai.request_languages (
 
-                                            foreign key (language_id) references pesquisai.language(id)
+                                            request_id UUID,
+
+                                            language_id varchar(10),
+
+                                            primary key (request_id,language_id),
+
+                                            foreign key (request_id) references pesquisai.requests(id),
+
+                                            foreign key (language_id) references pesquisai.languages(id)
 
 );
 
